@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Model1StoreContainer">
+          <EntitySet Name="AtBats" EntityType="Model1.Store.AtBats" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Games" EntityType="Model1.Store.Games" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pitches" EntityType="Model1.Store.Pitches" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlayerStaging" EntityType="Model1.Store.PlayerStaging" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_AtBatPitch" Association="Model1.Store.FK_AtBatPitch">
+            <End Role="AtBats" EntitySet="AtBats" />
+            <End Role="Pitches" EntitySet="Pitches" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AtBats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Strikes" Type="smallint" Nullable="false" />
+          <Property Name="Balls" Type="smallint" Nullable="false" />
+          <Property Name="Outs" Type="smallint" Nullable="false" />
+          <Property Name="start_tfs" Type="nvarchar(max)" />
+          <Property Name="start_tfs_zulu" Type="nvarchar(max)" />
+          <Property Name="batter" Type="int" Nullable="false" />
+          <Property Name="stand" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="b_height" Type="nvarchar(max)" />
+          <Property Name="pitcher" Type="int" Nullable="false" />
+          <Property Name="p_throws" Type="nvarchar(max)" />
+          <Property Name="atbat_des" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="atbat_event" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Inning" Type="smallint" Nullable="false" />
+          <Property Name="InningHalf" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="atbat_num" Type="smallint" Nullable="false" />
+          <Property Name="GameId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GameDate" Type="datetime" Nullable="false" />
+          <Property Name="HomeTeam" Type="nvarchar(max)" />
+          <Property Name="AwayTeam" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Pitches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="des" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="pitch_id" Type="int" Nullable="false" />
+          <Property Name="type" Type="nvarchar(max)" />
+          <Property Name="tfs" Type="nvarchar(max)" />
+          <Property Name="tfs_zulu" Type="nvarchar(max)" />
+          <Property Name="x" Type="decimal" Scale="2" />
+          <Property Name="y" Type="decimal" Scale="2" />
+          <Property Name="sv_id" Type="nvarchar(max)" />
+          <Property Name="start_speed" Type="decimal" Scale="2" />
+          <Property Name="end_speed" Type="decimal" Scale="2" />
+          <Property Name="sz_top" Type="decimal" Scale="2" />
+          <Property Name="sz_bot" Type="decimal" Scale="2" />
+          <Property Name="pfx_x" Type="decimal" Scale="2" />
+          <Property Name="pfx_z" Type="decimal" Scale="2" />
+          <Property Name="px" Type="decimal" Scale="3" />
+          <Property Name="pz" Type="decimal" Scale="3" />
+          <Property Name="x0" Type="decimal" Scale="3" />
+          <Property Name="y0" Type="decimal" Scale="3" />
+          <Property Name="z0" Type="decimal" Scale="3" />
+          <Property Name="vx0" Type="decimal" Scale="3" />
+          <Property Name="vy0" Type="decimal" Scale="3" />
+          <Property Name="vz0" Type="decimal" Scale="3" />
+          <Property Name="ax" Type="decimal" Scale="3" />
+          <Property Name="ay" Type="decimal" Scale="3" />
+          <Property Name="az" Type="decimal" Scale="3" />
+          <Property Name="break_y" Type="decimal" Scale="2" />
+          <Property Name="break_angle" Type="decimal" Scale="2" />
+          <Property Name="break_length" Type="decimal" Scale="2" />
+          <Property Name="pitch_type" Type="nvarchar(max)" />
+          <Property Name="type_confidence" Type="decimal" Scale="3" />
+          <Property Name="zone" Type="int" />
+          <Property Name="nasty" Type="int" />
+          <Property Name="spin_dir" Type="decimal" Scale="3" />
+          <Property Name="spin_rate" Type="decimal" Scale="3" />
+          <Property Name="cc" Type="nvarchar(max)" />
+          <Property Name="mt" Type="nvarchar(max)" />
+          <Property Name="AtBatId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayerStaging">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="first" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="last" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="num" Type="int" />
+          <Property Name="boxname" Type="varchar" MaxLength="255" />
+          <Property Name="rl" Type="varchar" MaxLength="10" />
+          <Property Name="position" Type="varchar" MaxLength="10" />
+          <Property Name="status" Type="varchar" MaxLength="10" />
+          <Property Name="bat_order" Type="int" />
+          <Property Name="game_position" Type="varchar" MaxLength="10" />
+          <Property Name="avg" Type="decimal" Scale="3" />
+          <Property Name="hr" Type="int" />
+          <Property Name="rbi" Type="int" />
+          <Property Name="wins" Type="int" />
+          <Property Name="losses" Type="int" />
+          <Property Name="era" Type="decimal" Scale="2" />
+          <Property Name="row_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_AtBatPitch">
+          <End Role="AtBats" Type="Model1.Store.AtBats" Multiplicity="1" />
+          <End Role="Pitches" Type="Model1.Store.Pitches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtBats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pitches">
+              <PropertyRef Name="AtBatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AtBats" EntityType="Model1.AtBat" />
+          <EntitySet Name="Games" EntityType="Model1.Game" />
+          <EntitySet Name="Pitches" EntityType="Model1.Pitch" />
+          <AssociationSet Name="GameAtBat" Association="Model1.GameAtBat">
+            <End Role="Game" EntitySet="Games" />
+            <End Role="AtBat" EntitySet="AtBats" />
+          </AssociationSet>
+          <AssociationSet Name="AtBatPitch" Association="Model1.AtBatPitch">
+            <End Role="AtBat" EntitySet="AtBats" />
+            <End Role="Pitch" EntitySet="Pitches" />
+          </AssociationSet>
+          <EntitySet Name="PlayerStagings" EntityType="Model1.PlayerStaging" />
+        </EntityContainer>
+        <EntityType Name="AtBat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="Strikes" Nullable="false" />
+          <Property Type="Int16" Name="Balls" Nullable="false" />
+          <Property Type="Int16" Name="Outs" Nullable="false" />
+          <Property Type="String" Name="start_tfs" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Type="String" Name="start_tfs_zulu" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Type="Int32" Name="batter" Nullable="false" />
+          <Property Type="String" Name="stand" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="b_height" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+          <Property Type="Int32" Name="pitcher" Nullable="false" />
+          <Property Type="String" Name="p_throws" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="atbat_des" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="atbat_event" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="Int16" Name="Inning" Nullable="false" />
+          <Property Type="Int16" Name="atbat_num" Nullable="false" />
+          <NavigationProperty Name="Game" Relationship="Model1.GameAtBat" FromRole="AtBat" ToRole="Game" />
+          <Property Type="Int32" Name="GameId" Nullable="false" />
+          <NavigationProperty Name="Pitches" Relationship="Model1.AtBatPitch" FromRole="AtBat" ToRole="Pitch" />
+          <Property Type="String" Name="InningHalf" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="DateTime" Name="GameDate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="HomeTeam" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Type="String" Name="AwayTeam" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <NavigationProperty Name="AtBats" Relationship="Model1.GameAtBat" FromRole="Game" ToRole="AtBat" />
+        </EntityType>
+        <EntityType Name="Pitch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="des" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="pitch_id" Nullable="false" />
+          <Property Type="String" Name="type" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Type="String" Name="tfs" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Type="String" Name="tfs_zulu" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Type="Decimal" Name="x" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="y" Precision="18" Scale="2" />
+          <Property Type="String" Name="sv_id" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Type="Decimal" Name="start_speed" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="end_speed" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="sz_top" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="sz_bot" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="pfx_x" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="pfx_z" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="px" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="pz" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="x0" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="y0" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="z0" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="vx0" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="vy0" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="vz0" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="ax" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="ay" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="az" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="break_y" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="break_angle" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="break_length" Precision="18" Scale="2" />
+          <Property Type="String" Name="pitch_type" Unicode="true" FixedLength="false" MaxLength="Max" />
+          <Property Type="Decimal" Name="type_confidence" Precision="18" Scale="3" />
+          <Property Type="Int32" Name="zone" />
+          <Property Type="Int32" Name="nasty" />
+          <Property Type="Decimal" Name="spin_dir" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="spin_rate" Precision="18" Scale="3" />
+          <Property Type="String" Name="cc" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="mt" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="AtBat" Relationship="Model1.AtBatPitch" FromRole="Pitch" ToRole="AtBat" />
+          <Property Type="Int32" Name="AtBatId" Nullable="false" />
+        </EntityType>
+        <Association Name="GameAtBat">
+          <End Type="Model1.Game" Role="Game" Multiplicity="1" />
+          <End Type="Model1.AtBat" Role="AtBat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Game">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AtBat">
+              <PropertyRef Name="GameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AtBatPitch">
+          <End Type="Model1.AtBat" Role="AtBat" Multiplicity="1" />
+          <End Type="Model1.Pitch" Role="Pitch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AtBat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pitch">
+              <PropertyRef Name="AtBatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PlayerStaging">
+          <Key>
+            <PropertyRef Name="row_id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="first" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="last" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="num" />
+          <Property Type="String" Name="boxname" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="rl" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="position" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="status" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="bat_order" />
+          <Property Type="String" Name="game_position" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="avg" Precision="18" Scale="3" />
+          <Property Type="Int32" Name="hr" />
+          <Property Type="Int32" Name="rbi" />
+          <Property Type="Int32" Name="wins" />
+          <Property Type="Int32" Name="losses" />
+          <Property Type="Decimal" Name="era" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="row_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="AtBats">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.AtBat)">
+        <MappingFragment StoreEntitySet="AtBats">
+          <ScalarProperty Name="InningHalf" ColumnName="InningHalf" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Strikes" ColumnName="Strikes" />
+          <ScalarProperty Name="Balls" ColumnName="Balls" />
+          <ScalarProperty Name="Outs" ColumnName="Outs" />
+          <ScalarProperty Name="start_tfs" ColumnName="start_tfs" />
+          <ScalarProperty Name="start_tfs_zulu" ColumnName="start_tfs_zulu" />
+          <ScalarProperty Name="batter" ColumnName="batter" />
+          <ScalarProperty Name="stand" ColumnName="stand" />
+          <ScalarProperty Name="b_height" ColumnName="b_height" />
+          <ScalarProperty Name="pitcher" ColumnName="pitcher" />
+          <ScalarProperty Name="p_throws" ColumnName="p_throws" />
+          <ScalarProperty Name="atbat_des" ColumnName="atbat_des" />
+          <ScalarProperty Name="atbat_event" ColumnName="atbat_event" />
+          <ScalarProperty Name="Inning" ColumnName="Inning" />
+          <ScalarProperty Name="atbat_num" ColumnName="atbat_num" />
+          <ScalarProperty Name="GameId" ColumnName="GameId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Games">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Game)">
+        <MappingFragment StoreEntitySet="Games">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="GameDate" ColumnName="GameDate" />
+          <ScalarProperty Name="HomeTeam" ColumnName="HomeTeam" />
+          <ScalarProperty Name="AwayTeam" ColumnName="AwayTeam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pitches">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Pitch)">
+        <MappingFragment StoreEntitySet="Pitches">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="des" ColumnName="des" />
+          <ScalarProperty Name="pitch_id" ColumnName="pitch_id" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="tfs" ColumnName="tfs" />
+          <ScalarProperty Name="tfs_zulu" ColumnName="tfs_zulu" />
+          <ScalarProperty Name="x" ColumnName="x" />
+          <ScalarProperty Name="y" ColumnName="y" />
+          <ScalarProperty Name="sv_id" ColumnName="sv_id" />
+          <ScalarProperty Name="start_speed" ColumnName="start_speed" />
+          <ScalarProperty Name="end_speed" ColumnName="end_speed" />
+          <ScalarProperty Name="sz_top" ColumnName="sz_top" />
+          <ScalarProperty Name="sz_bot" ColumnName="sz_bot" />
+          <ScalarProperty Name="pfx_x" ColumnName="pfx_x" />
+          <ScalarProperty Name="pfx_z" ColumnName="pfx_z" />
+          <ScalarProperty Name="px" ColumnName="px" />
+          <ScalarProperty Name="pz" ColumnName="pz" />
+          <ScalarProperty Name="x0" ColumnName="x0" />
+          <ScalarProperty Name="y0" ColumnName="y0" />
+          <ScalarProperty Name="z0" ColumnName="z0" />
+          <ScalarProperty Name="vx0" ColumnName="vx0" />
+          <ScalarProperty Name="vy0" ColumnName="vy0" />
+          <ScalarProperty Name="vz0" ColumnName="vz0" />
+          <ScalarProperty Name="ax" ColumnName="ax" />
+          <ScalarProperty Name="ay" ColumnName="ay" />
+          <ScalarProperty Name="az" ColumnName="az" />
+          <ScalarProperty Name="break_y" ColumnName="break_y" />
+          <ScalarProperty Name="break_angle" ColumnName="break_angle" />
+          <ScalarProperty Name="break_length" ColumnName="break_length" />
+          <ScalarProperty Name="pitch_type" ColumnName="pitch_type" />
+          <ScalarProperty Name="type_confidence" ColumnName="type_confidence" />
+          <ScalarProperty Name="zone" ColumnName="zone" />
+          <ScalarProperty Name="nasty" ColumnName="nasty" />
+          <ScalarProperty Name="spin_dir" ColumnName="spin_dir" />
+          <ScalarProperty Name="spin_rate" ColumnName="spin_rate" />
+          <ScalarProperty Name="cc" ColumnName="cc" />
+          <ScalarProperty Name="mt" ColumnName="mt" />
+          <ScalarProperty Name="AtBatId" ColumnName="AtBatId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+          <EntitySetMapping Name="PlayerStagings">
+            <EntityTypeMapping TypeName="Model1.PlayerStaging">
+              <MappingFragment StoreEntitySet="PlayerStaging">
+                <ScalarProperty Name="row_id" ColumnName="row_id" />
+                <ScalarProperty Name="era" ColumnName="era" />
+                <ScalarProperty Name="losses" ColumnName="losses" />
+                <ScalarProperty Name="wins" ColumnName="wins" />
+                <ScalarProperty Name="rbi" ColumnName="rbi" />
+                <ScalarProperty Name="hr" ColumnName="hr" />
+                <ScalarProperty Name="avg" ColumnName="avg" />
+                <ScalarProperty Name="game_position" ColumnName="game_position" />
+                <ScalarProperty Name="bat_order" ColumnName="bat_order" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="rl" ColumnName="rl" />
+                <ScalarProperty Name="boxname" ColumnName="boxname" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="last" ColumnName="last" />
+                <ScalarProperty Name="first" ColumnName="first" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model1" >
+        <EntityTypeShape EntityType="Model1.AtBat" Width="1.5" PointX="3.25" PointY="0.5" Height="4.480205078125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Game" Width="1.5" PointX="0.5" PointY="0.75" Height="2.172587890625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Pitch" Width="1.5" PointX="6.375" PointY="0.5" Height="8.5185351562500014" IsExpanded="true" />
+        <AssociationConnector Association="Model1.GameAtBat">
+          <ConnectorPoint PointX="2" PointY="1.8362939453124998" />
+          <ConnectorPoint PointX="3.25" PointY="1.8362939453124998" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model1.AtBatPitch">
+          <ConnectorPoint PointX="4.75" PointY="2.7401025390625" />
+          <ConnectorPoint PointX="6.375" PointY="2.7401025390625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Model1.PlayerStaging" Width="1.5" PointX="9.375" PointY="1.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
