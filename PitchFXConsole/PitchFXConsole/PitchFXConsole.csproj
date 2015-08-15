@@ -50,8 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectorBase.cs" />
+    <Compile Include="FileDownloader.cs" />
+    <Compile Include="FileParser.cs" />
+    <Compile Include="GameUrlCollector.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueueItem.cs" />
+    <Compile Include="QueueManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PitchFX.DAL\PitchFX.DAL.csproj">
