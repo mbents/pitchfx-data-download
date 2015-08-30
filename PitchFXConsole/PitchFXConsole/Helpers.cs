@@ -43,6 +43,11 @@ namespace PitchFXConsole
 
         public static void ParseXml(this XmlDocument xmlDoc, DateTime date, string gameID)
         {
+            var now = DateTime.Now;
+            var msg = string.Format("ParseXml started at: {0}", now.ToLongTimeString());
+            Console.WriteLine(msg);
+            log.Info(msg);
+
             using (var dbContext = new Model1Container())
             {
                 try
@@ -71,6 +76,10 @@ namespace PitchFXConsole
                     log.Error(err);
                 }
             }
+
+            msg = string.Format("ParseXml finished in: {0}", DateTime.Now - now);
+            Console.WriteLine(msg);
+            log.Info(msg);
         }
 
         private static AtBat GetAtBatFromXml(XmlNode atBatNode, int dbGameID, short inningNum, string inningHalf)
