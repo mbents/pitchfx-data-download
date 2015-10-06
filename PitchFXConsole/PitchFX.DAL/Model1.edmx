@@ -9,6 +9,9 @@
           <EntitySet Name="AtBats" EntityType="Model1.Store.AtBats" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Games" EntityType="Model1.Store.Games" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Pitches" EntityType="Model1.Store.Pitches" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PitchSpinRate" EntityType="Model1.Store.PitchSpinRate" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PitchStartSpeed" EntityType="Model1.Store.PitchStartSpeed" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlayerMaster" EntityType="Model1.Store.PlayerMaster" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PlayerStaging" EntityType="Model1.Store.PlayerStaging" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_AtBatPitch" Association="Model1.Store.FK_AtBatPitch">
             <End Role="AtBats" EntitySet="AtBats" />
@@ -36,6 +39,7 @@
           <Property Name="InningHalf" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="atbat_num" Type="smallint" Nullable="false" />
           <Property Name="GameId" Type="int" Nullable="false" />
+          <Property Name="play_guid" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Games">
           <Key>
@@ -89,6 +93,42 @@
           <Property Name="cc" Type="nvarchar(max)" />
           <Property Name="mt" Type="nvarchar(max)" />
           <Property Name="AtBatId" Type="int" Nullable="false" />
+          <Property Name="play_guid" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="PitchSpinRate">
+          <Key>
+            <PropertyRef Name="PitchSpinRateId" />
+          </Key>
+          <Property Name="PitchSpinRateId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="pitcher" Type="int" Nullable="false" />
+          <Property Name="pitch_type" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="spin_rate" Type="decimal" Nullable="false" Scale="3" />
+          <Property Name="sample_size" Type="int" Nullable="false" />
+          <Property Name="season" Type="int" />
+          <Property Name="StatTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="PitchStartSpeed">
+          <Key>
+            <PropertyRef Name="PitchStartSpeedId" />
+          </Key>
+          <Property Name="PitchStartSpeedId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="pitcher" Type="int" Nullable="false" />
+          <Property Name="pitch_type" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="start_speed" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="sample_size" Type="int" Nullable="false" />
+          <Property Name="season" Type="int" />
+          <Property Name="StatTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="PlayerMaster">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="first" Type="varchar" MaxLength="255" />
+          <Property Name="last" Type="varchar" MaxLength="255" />
+          <Property Name="rl" Type="varchar" MaxLength="10" />
+          <Property Name="HasPitcherStats" Type="bit" />
+          <Property Name="HasHitterStats" Type="bit" />
         </EntityType>
         <EntityType Name="PlayerStaging">
           <Key>
@@ -141,6 +181,9 @@
             <End Role="Pitch" EntitySet="Pitches" />
           </AssociationSet>
           <EntitySet Name="PlayerStagings" EntityType="Model1.PlayerStaging" />
+          <EntitySet Name="PlayerMasters" EntityType="Model1.PlayerMaster" />
+          <EntitySet Name="PitchSpinRates" EntityType="Model1.PitchSpinRate" />
+          <EntitySet Name="PitchStartSpeeds" EntityType="Model1.PitchStartSpeed" />
         </EntityContainer>
         <EntityType Name="AtBat">
           <Key>
@@ -165,6 +208,7 @@
           <Property Type="Int32" Name="GameId" Nullable="false" />
           <NavigationProperty Name="Pitches" Relationship="Model1.AtBatPitch" FromRole="AtBat" ToRole="Pitch" />
           <Property Type="String" Name="InningHalf" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="play_guid" />
         </EntityType>
         <EntityType Name="Game">
           <Key>
@@ -220,6 +264,7 @@
           <Property Type="String" Name="mt" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="AtBat" Relationship="Model1.AtBatPitch" FromRole="Pitch" ToRole="AtBat" />
           <Property Type="Int32" Name="AtBatId" Nullable="false" />
+          <Property Type="Guid" Name="play_guid" />
         </EntityType>
         <Association Name="GameAtBat">
           <End Type="Model1.Game" Role="Game" Multiplicity="1" />
@@ -267,6 +312,41 @@
           <Property Type="Decimal" Name="era" Precision="18" Scale="2" />
           <Property Type="Int32" Name="row_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
+        <EntityType Name="PlayerMaster">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="first" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="last" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="rl" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="HasPitcherStats" />
+          <Property Type="Boolean" Name="HasHitterStats" />
+        </EntityType>
+        <EntityType Name="PitchSpinRate">
+          <Key>
+            <PropertyRef Name="PitchSpinRateId" />
+          </Key>
+          <Property Type="Int32" Name="PitchSpinRateId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="pitcher" Nullable="false" />
+          <Property Type="String" Name="pitch_type" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="spin_rate" Nullable="false" Precision="18" Scale="3" />
+          <Property Type="Int32" Name="sample_size" Nullable="false" />
+          <Property Type="Int32" Name="season" />
+          <Property Type="Int32" Name="StatTypeId" />
+        </EntityType>
+        <EntityType Name="PitchStartSpeed">
+          <Key>
+            <PropertyRef Name="PitchStartSpeedId" />
+          </Key>
+          <Property Type="Int32" Name="PitchStartSpeedId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="pitcher" Nullable="false" />
+          <Property Type="String" Name="pitch_type" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="start_speed" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="sample_size" Nullable="false" />
+          <Property Type="Int32" Name="season" />
+          <Property Type="Int32" Name="StatTypeId" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -276,7 +356,8 @@
     <EntitySetMapping Name="AtBats">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.AtBat)">
         <MappingFragment StoreEntitySet="AtBats">
-          <ScalarProperty Name="InningHalf" ColumnName="InningHalf" />
+          <ScalarProperty Name="play_guid" ColumnName="play_guid" />
+                <ScalarProperty Name="InningHalf" ColumnName="InningHalf" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Strikes" ColumnName="Strikes" />
           <ScalarProperty Name="Balls" ColumnName="Balls" />
@@ -310,7 +391,8 @@
     <EntitySetMapping Name="Pitches">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.Pitch)">
         <MappingFragment StoreEntitySet="Pitches">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="play_guid" ColumnName="play_guid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="des" ColumnName="des" />
           <ScalarProperty Name="pitch_id" ColumnName="pitch_id" />
           <ScalarProperty Name="type" ColumnName="type" />
@@ -374,6 +456,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PlayerMasters">
+            <EntityTypeMapping TypeName="Model1.PlayerMaster">
+              <MappingFragment StoreEntitySet="PlayerMaster">
+                <ScalarProperty Name="HasHitterStats" ColumnName="HasHitterStats" />
+                <ScalarProperty Name="HasPitcherStats" ColumnName="HasPitcherStats" />
+                <ScalarProperty Name="rl" ColumnName="rl" />
+                <ScalarProperty Name="last" ColumnName="last" />
+                <ScalarProperty Name="first" ColumnName="first" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PitchSpinRates">
+            <EntityTypeMapping TypeName="Model1.PitchSpinRate">
+              <MappingFragment StoreEntitySet="PitchSpinRate">
+                <ScalarProperty Name="StatTypeId" ColumnName="StatTypeId" />
+                <ScalarProperty Name="season" ColumnName="season" />
+                <ScalarProperty Name="sample_size" ColumnName="sample_size" />
+                <ScalarProperty Name="spin_rate" ColumnName="spin_rate" />
+                <ScalarProperty Name="pitch_type" ColumnName="pitch_type" />
+                <ScalarProperty Name="pitcher" ColumnName="pitcher" />
+                <ScalarProperty Name="PitchSpinRateId" ColumnName="PitchSpinRateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PitchStartSpeeds">
+            <EntityTypeMapping TypeName="Model1.PitchStartSpeed">
+              <MappingFragment StoreEntitySet="PitchStartSpeed">
+                <ScalarProperty Name="StatTypeId" ColumnName="StatTypeId" />
+                <ScalarProperty Name="season" ColumnName="season" />
+                <ScalarProperty Name="sample_size" ColumnName="sample_size" />
+                <ScalarProperty Name="start_speed" ColumnName="start_speed" />
+                <ScalarProperty Name="pitch_type" ColumnName="pitch_type" />
+                <ScalarProperty Name="pitcher" ColumnName="pitcher" />
+                <ScalarProperty Name="PitchStartSpeedId" ColumnName="PitchStartSpeedId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -406,6 +526,9 @@
           <ConnectorPoint PointX="6.375" PointY="2.7401025390625" />
         </AssociationConnector>
         <EntityTypeShape EntityType="Model1.PlayerStaging" Width="1.5" PointX="9.375" PointY="1.75" />
+        <EntityTypeShape EntityType="Model1.PlayerMaster" Width="1.5" PointX="9.8033311654829109" PointY="28.334283543906306" />
+        <EntityTypeShape EntityType="Model1.PitchSpinRate" Width="1.5" PointX="10.193666941576483" PointY="29.726149826183054" />
+        <EntityTypeShape EntityType="Model1.PitchStartSpeed" Width="1.5" PointX="1.9678193637951367" PointY="28.4550566805783" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

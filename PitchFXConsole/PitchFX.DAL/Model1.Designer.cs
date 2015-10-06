@@ -135,6 +135,54 @@ namespace PitchFX.DAL
             }
         }
         private ObjectSet<PlayerStaging> _PlayerStagings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PlayerMaster> PlayerMasters
+        {
+            get
+            {
+                if ((_PlayerMasters == null))
+                {
+                    _PlayerMasters = base.CreateObjectSet<PlayerMaster>("PlayerMasters");
+                }
+                return _PlayerMasters;
+            }
+        }
+        private ObjectSet<PlayerMaster> _PlayerMasters;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PitchSpinRate> PitchSpinRates
+        {
+            get
+            {
+                if ((_PitchSpinRates == null))
+                {
+                    _PitchSpinRates = base.CreateObjectSet<PitchSpinRate>("PitchSpinRates");
+                }
+                return _PitchSpinRates;
+            }
+        }
+        private ObjectSet<PitchSpinRate> _PitchSpinRates;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PitchStartSpeed> PitchStartSpeeds
+        {
+            get
+            {
+                if ((_PitchStartSpeeds == null))
+                {
+                    _PitchStartSpeeds = base.CreateObjectSet<PitchStartSpeed>("PitchStartSpeeds");
+                }
+                return _PitchStartSpeeds;
+            }
+        }
+        private ObjectSet<PitchStartSpeed> _PitchStartSpeeds;
 
         #endregion
 
@@ -170,6 +218,30 @@ namespace PitchFX.DAL
         public void AddToPlayerStagings(PlayerStaging playerStaging)
         {
             base.AddObject("PlayerStagings", playerStaging);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PlayerMasters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPlayerMasters(PlayerMaster playerMaster)
+        {
+            base.AddObject("PlayerMasters", playerMaster);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PitchSpinRates EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPitchSpinRates(PitchSpinRate pitchSpinRate)
+        {
+            base.AddObject("PitchSpinRates", pitchSpinRate);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PitchStartSpeeds EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPitchStartSpeeds(PitchStartSpeed pitchStartSpeed)
+        {
+            base.AddObject("PitchStartSpeeds", pitchStartSpeed);
         }
 
         #endregion
@@ -639,6 +711,30 @@ namespace PitchFX.DAL
         private global::System.String _InningHalf;
         partial void OnInningHalfChanging(global::System.String value);
         partial void OnInningHalfChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> play_guid
+        {
+            get
+            {
+                return _play_guid;
+            }
+            set
+            {
+                Onplay_guidChanging(value);
+                ReportPropertyChanging("play_guid");
+                _play_guid = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("play_guid");
+                Onplay_guidChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _play_guid;
+        partial void Onplay_guidChanging(Nullable<global::System.Guid> value);
+        partial void Onplay_guidChanged();
 
         #endregion
 
@@ -1837,6 +1933,30 @@ namespace PitchFX.DAL
         private global::System.Int32 _AtBatId;
         partial void OnAtBatIdChanging(global::System.Int32 value);
         partial void OnAtBatIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> play_guid
+        {
+            get
+            {
+                return _play_guid;
+            }
+            set
+            {
+                Onplay_guidChanging(value);
+                ReportPropertyChanging("play_guid");
+                _play_guid = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("play_guid");
+                Onplay_guidChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _play_guid;
+        partial void Onplay_guidChanging(Nullable<global::System.Guid> value);
+        partial void Onplay_guidChanged();
 
         #endregion
 
@@ -1883,6 +2003,601 @@ namespace PitchFX.DAL
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="PitchSpinRate")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PitchSpinRate : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PitchSpinRate object.
+        /// </summary>
+        /// <param name="pitchSpinRateId">Initial value of the PitchSpinRateId property.</param>
+        /// <param name="pitcher">Initial value of the pitcher property.</param>
+        /// <param name="pitch_type">Initial value of the pitch_type property.</param>
+        /// <param name="spin_rate">Initial value of the spin_rate property.</param>
+        /// <param name="sample_size">Initial value of the sample_size property.</param>
+        public static PitchSpinRate CreatePitchSpinRate(global::System.Int32 pitchSpinRateId, global::System.Int32 pitcher, global::System.String pitch_type, global::System.Decimal spin_rate, global::System.Int32 sample_size)
+        {
+            PitchSpinRate pitchSpinRate = new PitchSpinRate();
+            pitchSpinRate.PitchSpinRateId = pitchSpinRateId;
+            pitchSpinRate.pitcher = pitcher;
+            pitchSpinRate.pitch_type = pitch_type;
+            pitchSpinRate.spin_rate = spin_rate;
+            pitchSpinRate.sample_size = sample_size;
+            return pitchSpinRate;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PitchSpinRateId
+        {
+            get
+            {
+                return _PitchSpinRateId;
+            }
+            set
+            {
+                if (_PitchSpinRateId != value)
+                {
+                    OnPitchSpinRateIdChanging(value);
+                    ReportPropertyChanging("PitchSpinRateId");
+                    _PitchSpinRateId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PitchSpinRateId");
+                    OnPitchSpinRateIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PitchSpinRateId;
+        partial void OnPitchSpinRateIdChanging(global::System.Int32 value);
+        partial void OnPitchSpinRateIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 pitcher
+        {
+            get
+            {
+                return _pitcher;
+            }
+            set
+            {
+                OnpitcherChanging(value);
+                ReportPropertyChanging("pitcher");
+                _pitcher = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("pitcher");
+                OnpitcherChanged();
+            }
+        }
+        private global::System.Int32 _pitcher;
+        partial void OnpitcherChanging(global::System.Int32 value);
+        partial void OnpitcherChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String pitch_type
+        {
+            get
+            {
+                return _pitch_type;
+            }
+            set
+            {
+                Onpitch_typeChanging(value);
+                ReportPropertyChanging("pitch_type");
+                _pitch_type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("pitch_type");
+                Onpitch_typeChanged();
+            }
+        }
+        private global::System.String _pitch_type;
+        partial void Onpitch_typeChanging(global::System.String value);
+        partial void Onpitch_typeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal spin_rate
+        {
+            get
+            {
+                return _spin_rate;
+            }
+            set
+            {
+                Onspin_rateChanging(value);
+                ReportPropertyChanging("spin_rate");
+                _spin_rate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("spin_rate");
+                Onspin_rateChanged();
+            }
+        }
+        private global::System.Decimal _spin_rate;
+        partial void Onspin_rateChanging(global::System.Decimal value);
+        partial void Onspin_rateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 sample_size
+        {
+            get
+            {
+                return _sample_size;
+            }
+            set
+            {
+                Onsample_sizeChanging(value);
+                ReportPropertyChanging("sample_size");
+                _sample_size = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("sample_size");
+                Onsample_sizeChanged();
+            }
+        }
+        private global::System.Int32 _sample_size;
+        partial void Onsample_sizeChanging(global::System.Int32 value);
+        partial void Onsample_sizeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> season
+        {
+            get
+            {
+                return _season;
+            }
+            set
+            {
+                OnseasonChanging(value);
+                ReportPropertyChanging("season");
+                _season = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("season");
+                OnseasonChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _season;
+        partial void OnseasonChanging(Nullable<global::System.Int32> value);
+        partial void OnseasonChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> StatTypeId
+        {
+            get
+            {
+                return _StatTypeId;
+            }
+            set
+            {
+                OnStatTypeIdChanging(value);
+                ReportPropertyChanging("StatTypeId");
+                _StatTypeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StatTypeId");
+                OnStatTypeIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _StatTypeId;
+        partial void OnStatTypeIdChanging(Nullable<global::System.Int32> value);
+        partial void OnStatTypeIdChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="PitchStartSpeed")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PitchStartSpeed : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PitchStartSpeed object.
+        /// </summary>
+        /// <param name="pitchStartSpeedId">Initial value of the PitchStartSpeedId property.</param>
+        /// <param name="pitcher">Initial value of the pitcher property.</param>
+        /// <param name="pitch_type">Initial value of the pitch_type property.</param>
+        /// <param name="start_speed">Initial value of the start_speed property.</param>
+        /// <param name="sample_size">Initial value of the sample_size property.</param>
+        public static PitchStartSpeed CreatePitchStartSpeed(global::System.Int32 pitchStartSpeedId, global::System.Int32 pitcher, global::System.String pitch_type, global::System.Decimal start_speed, global::System.Int32 sample_size)
+        {
+            PitchStartSpeed pitchStartSpeed = new PitchStartSpeed();
+            pitchStartSpeed.PitchStartSpeedId = pitchStartSpeedId;
+            pitchStartSpeed.pitcher = pitcher;
+            pitchStartSpeed.pitch_type = pitch_type;
+            pitchStartSpeed.start_speed = start_speed;
+            pitchStartSpeed.sample_size = sample_size;
+            return pitchStartSpeed;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PitchStartSpeedId
+        {
+            get
+            {
+                return _PitchStartSpeedId;
+            }
+            set
+            {
+                if (_PitchStartSpeedId != value)
+                {
+                    OnPitchStartSpeedIdChanging(value);
+                    ReportPropertyChanging("PitchStartSpeedId");
+                    _PitchStartSpeedId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PitchStartSpeedId");
+                    OnPitchStartSpeedIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PitchStartSpeedId;
+        partial void OnPitchStartSpeedIdChanging(global::System.Int32 value);
+        partial void OnPitchStartSpeedIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 pitcher
+        {
+            get
+            {
+                return _pitcher;
+            }
+            set
+            {
+                OnpitcherChanging(value);
+                ReportPropertyChanging("pitcher");
+                _pitcher = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("pitcher");
+                OnpitcherChanged();
+            }
+        }
+        private global::System.Int32 _pitcher;
+        partial void OnpitcherChanging(global::System.Int32 value);
+        partial void OnpitcherChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String pitch_type
+        {
+            get
+            {
+                return _pitch_type;
+            }
+            set
+            {
+                Onpitch_typeChanging(value);
+                ReportPropertyChanging("pitch_type");
+                _pitch_type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("pitch_type");
+                Onpitch_typeChanged();
+            }
+        }
+        private global::System.String _pitch_type;
+        partial void Onpitch_typeChanging(global::System.String value);
+        partial void Onpitch_typeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal start_speed
+        {
+            get
+            {
+                return _start_speed;
+            }
+            set
+            {
+                Onstart_speedChanging(value);
+                ReportPropertyChanging("start_speed");
+                _start_speed = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("start_speed");
+                Onstart_speedChanged();
+            }
+        }
+        private global::System.Decimal _start_speed;
+        partial void Onstart_speedChanging(global::System.Decimal value);
+        partial void Onstart_speedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 sample_size
+        {
+            get
+            {
+                return _sample_size;
+            }
+            set
+            {
+                Onsample_sizeChanging(value);
+                ReportPropertyChanging("sample_size");
+                _sample_size = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("sample_size");
+                Onsample_sizeChanged();
+            }
+        }
+        private global::System.Int32 _sample_size;
+        partial void Onsample_sizeChanging(global::System.Int32 value);
+        partial void Onsample_sizeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> season
+        {
+            get
+            {
+                return _season;
+            }
+            set
+            {
+                OnseasonChanging(value);
+                ReportPropertyChanging("season");
+                _season = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("season");
+                OnseasonChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _season;
+        partial void OnseasonChanging(Nullable<global::System.Int32> value);
+        partial void OnseasonChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> StatTypeId
+        {
+            get
+            {
+                return _StatTypeId;
+            }
+            set
+            {
+                OnStatTypeIdChanging(value);
+                ReportPropertyChanging("StatTypeId");
+                _StatTypeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StatTypeId");
+                OnStatTypeIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _StatTypeId;
+        partial void OnStatTypeIdChanging(Nullable<global::System.Int32> value);
+        partial void OnStatTypeIdChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Model1", Name="PlayerMaster")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class PlayerMaster : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new PlayerMaster object.
+        /// </summary>
+        /// <param name="id">Initial value of the id property.</param>
+        public static PlayerMaster CreatePlayerMaster(global::System.Int32 id)
+        {
+            PlayerMaster playerMaster = new PlayerMaster();
+            playerMaster.id = id;
+            return playerMaster;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String first
+        {
+            get
+            {
+                return _first;
+            }
+            set
+            {
+                OnfirstChanging(value);
+                ReportPropertyChanging("first");
+                _first = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("first");
+                OnfirstChanged();
+            }
+        }
+        private global::System.String _first;
+        partial void OnfirstChanging(global::System.String value);
+        partial void OnfirstChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String last
+        {
+            get
+            {
+                return _last;
+            }
+            set
+            {
+                OnlastChanging(value);
+                ReportPropertyChanging("last");
+                _last = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("last");
+                OnlastChanged();
+            }
+        }
+        private global::System.String _last;
+        partial void OnlastChanging(global::System.String value);
+        partial void OnlastChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String rl
+        {
+            get
+            {
+                return _rl;
+            }
+            set
+            {
+                OnrlChanging(value);
+                ReportPropertyChanging("rl");
+                _rl = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("rl");
+                OnrlChanged();
+            }
+        }
+        private global::System.String _rl;
+        partial void OnrlChanging(global::System.String value);
+        partial void OnrlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> HasPitcherStats
+        {
+            get
+            {
+                return _HasPitcherStats;
+            }
+            set
+            {
+                OnHasPitcherStatsChanging(value);
+                ReportPropertyChanging("HasPitcherStats");
+                _HasPitcherStats = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("HasPitcherStats");
+                OnHasPitcherStatsChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _HasPitcherStats;
+        partial void OnHasPitcherStatsChanging(Nullable<global::System.Boolean> value);
+        partial void OnHasPitcherStatsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> HasHitterStats
+        {
+            get
+            {
+                return _HasHitterStats;
+            }
+            set
+            {
+                OnHasHitterStatsChanging(value);
+                ReportPropertyChanging("HasHitterStats");
+                _HasHitterStats = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("HasHitterStats");
+                OnHasHitterStatsChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _HasHitterStats;
+        partial void OnHasHitterStatsChanging(Nullable<global::System.Boolean> value);
+        partial void OnHasHitterStatsChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>

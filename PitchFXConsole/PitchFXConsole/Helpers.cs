@@ -135,7 +135,8 @@ namespace PitchFXConsole
                     atbat_event = atBatNode.Attributes["event"].Value,
                     GameId = dbGameID,
                     Inning = inningNum,
-                    InningHalf = inningHalf
+                    InningHalf = inningHalf,
+                    play_guid = atBatNode.Attributes["play_guid"] == null || string.IsNullOrEmpty(atBatNode.Attributes["play_guid"].Value) ? (Guid?)null : Guid.Parse(atBatNode.Attributes["play_guid"].Value)
                 };
             }
             catch (Exception ex)
@@ -191,6 +192,7 @@ namespace PitchFXConsole
                     spin_rate = pitchNode.Attributes["spin_rate"] == null ? (decimal?)null : Convert.ToDecimal(pitchNode.Attributes["spin_rate"].Value),
                     cc = pitchNode.Attributes["cc"] == null ? null : pitchNode.Attributes["cc"].Value,
                     mt = pitchNode.Attributes["mt"] == null ? null : pitchNode.Attributes["mt"].Value,
+                    play_guid = pitchNode.Attributes["play_guid"] == null || string.IsNullOrEmpty(pitchNode.Attributes["play_guid"].Value) ? (Guid?)null : Guid.Parse(pitchNode.Attributes["play_guid"].Value),
                     AtBatId = dbAtBatID
                 };
             }
