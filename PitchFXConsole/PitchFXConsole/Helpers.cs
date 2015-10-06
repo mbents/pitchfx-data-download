@@ -41,10 +41,10 @@ namespace PitchFXConsole
             }
         }
 
-        public static void ParseXml(this XmlDocument xmlDoc, DateTime date, string gameID)
+        public static void ParsePitchXml(this XmlDocument xmlDoc, DateTime date, string gameID)
         {
             var now = DateTime.Now;
-            var msg = string.Format("ParseXml started at: {0}", now.ToLongTimeString());
+            var msg = string.Format("ParsePitchXml started at: {0}", now.ToLongTimeString());
             Console.WriteLine(msg);
             log.Info(msg);
 
@@ -71,13 +71,44 @@ namespace PitchFXConsole
                 }
                 catch (Exception ex)
                 {
-                    string err = string.Format("Error in ParseXml: {0}", ex.ToString());
+                    string err = string.Format("Error in ParsePitchXml: {0}", ex.ToString());
                     Console.WriteLine(err);
                     log.Error(err);
                 }
             }
 
-            msg = string.Format("ParseXml finished in: {0}", DateTime.Now - now);
+            msg = string.Format("ParsePitchXml finished in: {0}", DateTime.Now - now);
+            Console.WriteLine(msg);
+            log.Info(msg);
+        }
+
+        public static void ParsePlayerXml(this XmlDocument xmlDoc, DateTime date, string gameID)
+        {
+            var now = DateTime.Now;
+            var msg = string.Format("ParsePlayerXml started at: {0}", now.ToLongTimeString());
+            Console.WriteLine(msg);
+            log.Info(msg);
+
+            using (var dbContext = new Model1Container())
+            {
+                try
+                {
+                    if (dbContext.Connection.State != System.Data.ConnectionState.Open)
+                        dbContext.Connection.Open();
+
+                    var root = xmlDoc.DocumentElement;
+                    var teamNodes = root.ChildNodes;
+                    AddPlayers(teamNodes, dbContext);
+                }
+                catch (Exception ex)
+                {
+                    string err = string.Format("Error in ParsePlayerXml: {0}", ex.ToString());
+                    Console.WriteLine(err);
+                    log.Error(err);
+                }
+            }
+
+            msg = string.Format("ParsePlayerXml finished in: {0}", DateTime.Now - now);
             Console.WriteLine(msg);
             log.Info(msg);
         }
@@ -267,6 +298,21 @@ namespace PitchFXConsole
                     dbContext.Pitches.AddObject(pitch);
                     dbContext.SaveChanges();
                     int dbPitchID = pitch.Id;
+                }
+        }
+
+        private static void AddPlayers(XmlNodeList teamNodes, Model1Container dbContext)
+        {
+            foreach (XmlNode node in teamNodes)
+                if (node.Name == "team")
+                {
+                    foreach (XmlNode playerNode in node.ChildNodes)
+                        if (playerNode.Name == "player")
+                        {
+                            var player = GetPlayerFromXml(playerNode);
+                            dbContext.PlayerStagings.AddObject(player);
+                            dbContext.SaveChanges();
+                        }
                 }
         }
     }

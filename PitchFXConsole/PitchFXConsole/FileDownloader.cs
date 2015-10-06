@@ -20,7 +20,7 @@ namespace PitchFXConsole
             {
                 var item = QueueManager.Instance.GetUrlToDownload();
 
-                Console.WriteLine("{0} : {1}", item.GameDate.ToShortDateString(), item.FileURL);
+                Console.WriteLine("{0} : {1}", item.GameDate.ToShortDateString(), item.InningsFileURL);
 
                 var gameDir = Path.Combine(item.OutputDir, item.GameID);
                 Helpers.VerifyDirectory(gameDir);
@@ -28,7 +28,8 @@ namespace PitchFXConsole
                 try
                 {
                     var client = new WebClient();
-                    client.DownloadFile(item.FileURL, string.Format("{0}\\inning_all.xml", gameDir));
+                    client.DownloadFile(item.InningsFileURL, string.Format("{0}\\inning_all.xml", gameDir));
+                    client.DownloadFile(item.PlayersFileURL, string.Format("{0}\\players.xml", gameDir));
                     item.OutputDir = gameDir;
                     QueueManager.Instance.AddFileToParse(item);
                 }

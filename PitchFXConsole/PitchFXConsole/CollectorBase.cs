@@ -67,11 +67,14 @@ namespace PitchFXConsole
                         {
                             if (startsWith == "gid_")
                             {
-                                string _url = string.Format("{0}{1}inning/inning_all.xml", string.Format(BaseURL, date.Year, date.Month < 10 ? "0" + date.Month : date.Month.ToString(),
-                                    date.Day < 10 ? "0" + date.Day : date.Day.ToString()), gameNode.InnerText.Trim());
+                                string _gameBaseURL = string.Format(BaseURL, date.Year, date.Month < 10 ? "0" + date.Month : date.Month.ToString(),
+                                    date.Day < 10 ? "0" + date.Day : date.Day.ToString());
+                                string _inningFileUrl = string.Format("{0}{1}inning/inning_all.xml", _gameBaseURL, gameNode.InnerText.Trim());
+                                string _playerFileUrl = string.Format("{0}{1}players.xml", _gameBaseURL, gameNode.InnerText.Trim());
                                 QueueManager.Instance.AddUrlToDownload(new QueueItem 
                                     { 
-                                        FileURL = _url, 
+                                        InningsFileURL = _inningFileUrl,
+                                        PlayersFileURL = _playerFileUrl,
                                         GameDate = date,
                                         GameID = gameNode.InnerText.Trim().TrimEnd('/'),
                                         OutputDir = System.IO.Path.Combine(BaseOutputDir, date.Year.ToString(), date.Month.ToString(),

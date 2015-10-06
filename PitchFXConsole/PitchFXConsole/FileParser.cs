@@ -17,12 +17,26 @@ namespace PitchFXConsole
                     break;
                 else if (item != null)
                 {
-                    var xmlString = File.ReadAllText(string.Format("{0}\\inning_all.xml", item.OutputDir));
-                    XmlDocument doc = new XmlDocument();
-                    doc.LoadXml(xmlString);
-                    doc.ParseXml(item.GameDate, item.GameID);
+                    ParsePitchFile(item);
+                    ParsePlayerFile(item);
                 }
             }
+        }
+
+        private static void ParsePitchFile(QueueItem item)
+        {
+            var xmlString = File.ReadAllText(string.Format("{0}\\inning_all.xml", item.OutputDir));
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xmlString);
+            doc.ParsePitchXml(item.GameDate, item.GameID);
+        }
+
+        private static void ParsePlayerFile(QueueItem item)
+        {
+            var xmlString = File.ReadAllText(string.Format("{0}\\players.xml", item.OutputDir));
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xmlString);
+            doc.ParsePlayerXml(item.GameDate, item.GameID);
         }
     }
 }
